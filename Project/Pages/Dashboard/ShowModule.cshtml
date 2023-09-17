@@ -1,0 +1,35 @@
+﻿@model List<string>
+
+
+<div class="modal-header ">
+    <h5 class="modal-title mt-0">Modules</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Module</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                <td>@item</td>
+            </tr>
+        }
+
+
+
+
+
+    </tbody>
+</table>
+<table>
+</table>

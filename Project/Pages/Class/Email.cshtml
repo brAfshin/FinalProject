@@ -1,0 +1,94 @@
+﻿@page
+@inject CookieOptions Cookie
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Project.Pages.Class.EmailModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Send Email";
+}
+<h5 class="mt-4 mb-3">Module: @Cookie.GetCookies("module")</h5>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="./Index">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Send Email</li>
+    </ol>
+</nav>
+<h2 class="mt-3 mb-5">Send Email</h2>
+<div>
+    <form method="post" asp-page-handler="SendMail">
+        <div class="form-group">
+            <div class="row">
+                <div class="col mb-3">
+                    @Html.Raw(@TempData["ErrorMessage"]?.ToString())
+                </div>
+            </div>
+            <label >Email address</label>
+
+            <row>
+                <select class="contacts form-control mt-3 col-12" name="emails" id="contacts" multiple="multiple" required>
+
+                    @foreach (var item in Model.Contacts)
+                    {
+                        if (item.Id == Model.SelectedId)
+                        {
+                            <option value="@item.Email" selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Email">@item.Name</option>
+                        }
+                        
+                    }
+                </select>
+            </row>
+            <div class="mb-3 mt-2">
+                <button type="button" name="btnAll" id="btnAll" class="btn btn-secondary mb-2">Select All</button>
+            </div>
+
+        </div>
+        <div style="margin-top: 30px">
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="body">Body</label>
+                <textarea class="form-control" id="body" rows="6" name="body" required></textarea>
+            </div>
+        </div>
+        <row>
+            <button type="submit" class="btn btn-primary btnEmail">Send</button>
+        </row>
+
+    </form>
+
+</div>
+
+@section Scripts
+{
+    
+    <script src="~/lib/select2/select2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('.contacts').select2();
+        });
+        
+        
+
+        $("#btnAll").click(function () {
+
+                $("#contacts > option").prop("selected", "selected");
+                $("#contacts").trigger("change");
+    });
+
+
+
+    </script>
+
+}
+@section Css
+{
+    <link href="~/lib/select2/select2.min.css" rel="stylesheet" type="text/css" />
+
+}

@@ -1,0 +1,74 @@
+﻿@page
+@model Project.Pages.Class.IndexModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Dashboard";
+}
+<h3 class="mt-5">@Model.Year - @Model.ClassName</h3>
+<div class="row my-5 " style="place-items: center;">
+    <label class="col-2 col-lg-1 bold-label" for="inlineFormCustomSelect">Module</label>
+    <select class="col-5 btn-lg" onchange="setCookie();" id="select">
+        @foreach (var item in Model.Modules)
+        {
+            <option value=@item>@item</option>
+        }
+
+    </select>
+</div>
+
+<div class="row mt-4 justify-content-center">
+
+    <a class="col-12 col-md-4 p-3" asp-page="./StudentInfo">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard"> View Students</p>
+        </div>
+    </a>
+    <a class="col-12 col-md-4 p-3" asp-page="./Add">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard"> Add/Update Data</p>
+        </div>
+    </a>
+
+    <a class="col-12 col-md-4  p-3" asp-page="./Template">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard">Update Template</p>
+        </div>
+    </a>  
+
+    <a class="col-12 col-md-4 c p-3" asp-page="./Email">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard">Send Email</p>
+        </div>
+    </a>
+    
+    <a class="col-12 col-md-4  p-3" asp-page="./StudentProgress">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard">Student Progress</p>
+        </div>
+    </a>
+    
+    <a class="col-12 col-md-4  p-3" asp-page="./Report">
+        <div class="CustomCardBorder">
+            <p class="text-white CustomCard">Reports</p>
+        </div>
+    </a>
+</div>
+
+@section Scripts
+{
+    <script>
+        var e = document.getElementById("select").value;
+        var command = "module=" + e + " ; path=/";
+            document.cookie = command;
+        function setCookie(){
+            var e = document.getElementById("select").value;
+            var command = "module=" + e + " ; path=/";
+            document.cookie = command;
+
+            }
+
+
+    
+    </script>
+
+}

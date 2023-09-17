@@ -1,0 +1,99 @@
+﻿@page
+@model Project.Pages.Class.ConfirmationModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Confirmation";
+}
+@{
+    <div class="row  mb-2 mt-3">
+        <div class="col">
+            @Html.Raw(@TempData["ErrorMessage"]?.ToString())
+        </div>
+    </div>
+    @if  (Model.Result == null||Model.Result.Count == 0 )
+    {
+        <p class="mt-4">There is no similarity between the new data and the old data, and all data is new. </p>
+
+    }
+
+    else
+    {
+        @if (Model.Result.Any(x=>x.IsDifferent))
+        {
+            <p class="mt-4 mb-4">The following data was previously available in the table (red color is the new one). </p>
+            <div style="width:100%;overflow:auto; max-height:500px;">
+                <table class="table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            @foreach (var item in Model.Result[0].Items)
+                            {
+
+                                <th scope="col">@item.Title</th>
+                            }
+                        </tr>
+                    </thead>
+                    @foreach (var row in Model.Result)
+                    {
+                        <tr>
+                            @if (row.IsDifferent)
+                            {
+                                <td>@row.Id</td>
+                                @foreach (var item in row.Items)
+                                {
+                                    @if (item.NewItem != item.OldItem)
+                                    {
+                                        <td>
+                                            <div style="display: flex">
+                                                <p>@item.NewItem &nbsp</p>
+                                                <p style="color: red;">(@item.OldItem)</p>
+                                            </div>
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <div style="display: flex">
+                                                <p>@item.NewItem</p>
+                                            </div>
+
+                                        </td>
+                                    }
+                                }
+                            }
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        }
+        else
+        {
+
+
+            <p class="mt-4">There is no change in comparison to the previous data. </p>
+        }
+
+    }
+    <p class="mt-3"> The table will be updated with the new data. Would you like to continue?</p>
+
+    <form method="post" asp-page="Confirmation" asp-page-handler="AddToDb">
+        <div class="mt-3 btnEmail">
+            <input type="hidden" name="type" value="@Model.Command.Type" />
+            <input type="hidden" name="idCol" value="@Model.Command.IdCol" />
+            <input type="hidden" name="replace" value="@Model.Command.Replace" />
+            <input type="hidden" name="filePath" value="@Model.Command.FilePath" />
+            <input type="hidden" name="cols" value="@Model.ColList" />
+            <input type="hidden" name="firstRow" value="@Model.Command.StartRow" />
+            <a class="btn  btn-secondary" asp-page="Add" asp-page-handler="Index">Back</a>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+
+
+
+        </div>
+        
+    </form>
+}

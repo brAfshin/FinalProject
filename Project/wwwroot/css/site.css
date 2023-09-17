@@ -1,0 +1,74 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.bg-blue {
+    background: dodgerblue;
+}
+
+.txt-white{
+    color: white;
+}
+
+.table-row {
+    vertical-align: middle !important;
+}
+
+.error-messages {
+    color: #dc3545 !important;
+    white-space: pre;
+}
+
+.asp-error-button {
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.error{
+    color:red;
+    margin-left: 20px
+}
+
+
+.CustomCard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-size: 1.25rem;
+}
+
+.CustomCardBorder {
+    background: #007bff;
+    min-height: 200px;
+    border-radius: 25px;
+}
+
+.btnEmail {
+    float: right;
+    min-width: 100px;
+}
+.bold-label {
+    font-size: larger;
+    font-weight: 600;
+}
+.result {
+    display: flex;
+    place-items: center;
+}

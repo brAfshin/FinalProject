@@ -1,0 +1,212 @@
+﻿@page
+@using System.Data
+@inject CookieOptions Cookie
+
+@model Project.Pages.Class.DetailsModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Student Progress";
+}
+@{
+    <h5 class="mt-4 mb-3">Module: @Cookie.GetCookies("module")</h5>
+    <nav aria-label="breadcrumb" class="mt-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="./Index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-page="./StudentProgress">Student Progress</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Student Info</li>
+        </ol>
+    </nav>
+    <div class="result mb-3">
+        <p style="font-weight: bold">Student ID:&nbsp&nbsp</p>
+        <p>@Model.Info.Id</p>
+    </div>
+    <div class="result mb-3">
+        <p style="font-weight: bold">First Name:&nbsp&nbsp</p>
+        <p>@Model.Info.Forename</p>
+    </div>
+    <div class="result mb-3">
+        <p style="font-weight: bold">Last Name:&nbsp&nbsp</p>
+        <p>@Model.Info.Surname</p>
+    </div>
+
+    <h5 class="mb-3">Modules</h5>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        @foreach (var item in Model.Info.ModuleProgress)
+        {
+            if (Model.Info.ModuleProgress.IndexOf(item) == 0)
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href=@($"#{item.Name}")>@item.Name</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href=@($"#{item.Name}")>@item.Name</a>
+                </li>
+            }
+
+        }
+
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        @foreach (var item in Model.Info.ModuleProgress)
+        {
+            if (Model.Info.ModuleProgress.IndexOf(item) == 0)
+            {
+                <div class="tab-pane container active" id="@item.Name" a>
+                    <h6 class="mt-5"> Marks</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @foreach (DataColumn col in item.Mark.Table.Columns)
+                                {
+                                    <th>@col.ColumnName</th>
+                                }
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var row in item.Mark.ItemArray)
+                                {
+                                    <td>@row.ToString()</td>
+                                }
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <h6 class="mt-5"> Attendance</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @foreach (DataColumn col in item.Attendance.Table.Columns)
+                                {
+                                    <th>@col.ColumnName</th>
+                                }
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var row in item.Attendance.ItemArray)
+                                {
+                                    <td>@row.ToString()</td>
+                                }
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <h6 class="mt-5"> Checkpoints</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @foreach (DataColumn col in item.Checkpoint.Table.Columns)
+                                {
+                                    <th>@col.ColumnName</th>
+                                }
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var row in item.Checkpoint.ItemArray)
+                                {
+                                    <td>@row.ToString()</td>
+                                }
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="tab-pane container " id="@item.Name">
+                    <h6 class="mt-5"> Marks</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                @foreach (DataColumn col in item.Mark.Table.Columns)
+                                {
+                                    <th>@col.ColumnName</th>
+                                }
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var row in item.Mark.ItemArray)
+                                {
+                                    <td>@row.ToString()</td>
+                                }
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <h6 class="mt-5"> Attendance</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            @foreach (DataColumn col in item.Attendance.Table.Columns)
+                            {
+                                <th>@col.ColumnName</th>
+                            }
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach (var row in item.Attendance.ItemArray)
+                            {
+                                <td>@row.ToString()</td>
+                            }
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <h6 class="mt-5"> Checkpoints</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            @foreach (DataColumn col in item.Checkpoint.Table.Columns)
+                            {
+                                <th>@col.ColumnName</th>
+                            }
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach (var row in item.Checkpoint.ItemArray)
+                            {
+                                <td>@row.ToString()</td>
+                            }
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+        }
+
+    </div>
+
+}

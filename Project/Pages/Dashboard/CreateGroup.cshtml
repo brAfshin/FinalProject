@@ -1,0 +1,46 @@
+﻿@model ProjectManagement.Application.Contracts.Class.CreateGroup
+@{
+}
+
+<div class="modal-header ">
+    <h5 class="modal-title mt-0">New Group</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form asp-page="./Index" asp-page-handler="CreateGroup" method="post">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <div class="error-messages" id="ErrorMessage"></div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-sm-3 col-form-label text-left">Name </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="Name" />
+                    </div>
+                    <span asp-validation-for="Name" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="Year" class="col-sm-3 col-form-label text-left">Year </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="Year" />
+                    </div>
+                    <span asp-validation-for="Year" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+    </div>
+</form>
