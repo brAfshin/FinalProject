@@ -1,0 +1,84 @@
+﻿@page
+@inject CookieOptions Cookie
+@model Project.Pages.Class.Add
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Add/Update Data";
+}
+
+<h5 class="mt-4 mb-3">Module: @Cookie.GetCookies("module")</h5>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="./Index">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Data</li>
+    </ol>
+</nav>
+<div class="row  mb-2 mt-3">
+    <div class="col">
+        @Html.Raw(@TempData["ErrorMessage"]?.ToString())
+    </div>
+</div>
+<row class="mt-4">
+    <form method="get" asp-page-handler="Index" asp-page="Confirmation">
+        <div class="mb-4">
+            <div class="form-check-inline">
+                <label class="form-check-label">Type:</label>
+
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="type" checked value="mark">Mark
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="type" value="attendance">Attendance
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="type" value="checkpoint">Checkpoint
+                </label>
+            </div>
+        </div>
+
+
+        <div class="form-group row mb-4">
+            <label for="template" class="col-sm-2 col-form-label">File Location</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="template" placeholder="e.g. template.xlsx, info/template.xlsx" name="filePath" required>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Header Row</label>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <input type="number" class="form-control" placeholder="row. e.g. 1" name="firstRow" required>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Id column</label>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <input type="text" class="form-control" placeholder="row. e.g. A" name="idCol" required>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Columns</label>
+            </div>
+            <div class="col-6 col-md-4 col-lg-4">
+                <input type="text" class="form-control" placeholder="separate with comma . e.g. A,B,C" name="cols" required>
+            </div>
+        </div>
+        <div class="form-group form-check form-row" hidden>
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="replace" checked="">
+            <label class="form-check-label" for="exampleCheck1">Replace Existing Columns</label>
+        </div>
+        <row>
+            <button type="submit" class="btn btn-primary btnEmail">Add</button>
+        </row>
+    </form>
+</row>

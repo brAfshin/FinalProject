@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>90c8f549-6304-4986-8330-27e6566a5b35</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.13.2" />
+    <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.13.2" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="2.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectManagement.Application.Contracts\ProjectManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ProjectManagement.Application\ProjectManagement.Application.csproj" />
+    <ProjectReference Include="..\ProjectManagement.Infrastructure\ProjectManagement.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\datatable\" />
+  </ItemGroup>
+
+</Project>

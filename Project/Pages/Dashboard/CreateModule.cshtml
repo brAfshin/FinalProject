@@ -1,0 +1,103 @@
+﻿@model ProjectManagement.Application.Contracts.Class.AddModule
+
+
+<div class="modal-header ">
+    <h5 class="modal-title mt-0">New Class</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<form asp-page="./Index" asp-page-handler="CreateModule" method="post">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <div class="error-messages" id="ErrorMessage"></div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-sm-3 col-form-label text-left">Name </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="Name" />
+                    </div>
+                    <span asp-validation-for="Name" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+ <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="SourcePath" class="col-sm-3 col-form-label text-left">Info Path </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="SourcePath" placeholder="e.g. file.xlsx, info/file.xlsx" />
+                    </div>
+                    <span asp-validation-for="SourcePath" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="StartingRow" class="col-sm-3 col-form-label text-left">Header Row </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="StartingRow" />
+                    </div>
+                    <span asp-validation-for="StartingRow" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <h5 class="mb-3">Columns</h5>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="IdCol" class="col-sm-3 col-form-label text-left">Id Column</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="IdCol" />
+                    </div>
+                    <span asp-validation-for="IdCol" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="FirstNameCol" class="col-sm-3 col-form-label text-left">First Name</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="FirstNameCol" />
+                    </div>
+                    <span asp-validation-for="FirstNameCol" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="LastNameCol" class="col-sm-3 col-form-label text-left">Last Name</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="LastNameCol" />
+                    </div>
+                    <span asp-validation-for="LastNameCol" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <div class="form-group row">
+                    <label asp-for="EmailCol" class="col-sm-3 col-form-label text-left">Email</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="EmailCol" />
+                    </div>
+                    <span asp-validation-for="EmailCol" class="error asp-error-button"></span>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" asp-for="dbPath" value="@Model.dbPath"/>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+    </div>
+</form>

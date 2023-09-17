@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.0" />
+    <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="2.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectManagement.Application.Contracts\ProjectManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ProjectManagement.Domain\ProjectManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

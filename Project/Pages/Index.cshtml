@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "Shared/_blankLayout";
+}
+
+
+<div style="text-align-last: center">
+    <img class="mt-5" style="width: 200px" src="/img/logo.png" />
+    <div style="margin-top: 100px">
+        <h2 class="text-center">To Continue please login with your Microsoft account</h2>
+        <br />
+        <div class="mt-5" style="text-align-last: center;">
+            <a class="btn btn-primary btn-large" asp-page="/Dashboard/Index">Login</a>
+        </div>
+
+    </div>
+
+</div>

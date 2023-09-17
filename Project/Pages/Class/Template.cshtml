@@ -1,0 +1,104 @@
+﻿@page
+@inject CookieOptions Cookie
+@model Project.Pages.Class.TemplateModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Update Template";
+}
+<h5 class="mt-4 mb-3">Module: @Cookie.GetCookies("module")</h5>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="./Index">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update Template</li>
+    </ol>
+</nav>
+<p style="margin-bottom: 30px;">Enter the location of the template to start filling the grades</p>
+<row class="mt-4">
+    <form method="post" asp-page-handler="Download" asp-page="Template">
+        <h4 class="mb-4">Source Information</h4>
+
+        <row >
+            <select class="contacts form-control mt-3 col-12" name="table" id="table" required>
+                <optgroup label="Information">
+                    @foreach (var item in Model.Headers)
+                    {
+                        <option value="@($"{item.table}---{item.title}")">@item.title</option>
+                    }
+                </optgroup>
+                <optgroup label="Mark">
+                    @foreach (var item in Model.Mark)
+                    {
+                        <option value="@($"{item.table}---{item.title}")">@item.title</option>
+                    }
+                </optgroup>
+                <optgroup label="Attendance">
+                    @foreach (var item in Model.Attendance)
+                    {
+                        <option value="@($"{item.table}---{item.title}")">@item.title</option>
+                    }
+                </optgroup>
+                <optgroup label="Checkpoint">
+                    @foreach (var item in Model.Checkpoint)
+                    {
+                        <option value="@($"{item.table}---{item.title}")">@item.title</option>
+                    }
+                </optgroup>
+
+            </select>
+        </row>
+        
+        <h4 class="mt-4 mb-4">Template Information</h4>
+        <div class="form-group row mb-4">
+            <label for="template" class="col-sm-2 col-form-label">Template Location</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="template" placeholder="e.g. template.xlsx, info/template.xlsx" name="path" required>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Starting Row Number</label>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <input type="number" class="form-control" placeholder="row. e.g. 1" name="irow" required>
+            </div>
+        </div>
+
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Id Column</label>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <input type="text" class="form-control" placeholder="column. e.g. A" name="icol" required>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-12 col-md-3">
+                <label class=" col-form-label">Destination Column</label>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <input type="text" class="form-control" placeholder="column. e.g. A" name="gcol" required>
+            </div>
+        </div>
+        <row>
+            <button type="submit" class="btn btn-primary btnEmail">Start</button>
+        </row>
+    </form>
+</row>
+@section Scripts
+{
+
+    <script src="~/lib/select2/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').select2();
+        });
+
+
+    </script>
+
+}
+@section Css
+{
+    <link href="~/lib/select2/select2.min.css" rel="stylesheet" type="text/css" />
+
+}

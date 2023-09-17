@@ -1,0 +1,90 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Dashboard";
+}
+
+@if (User.Identity!.IsAuthenticated)
+{
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2>Groups</h2>
+
+        <div class="row  mb-2 mt-3">
+            <div class="col">
+                @Html.Raw(@TempData["ErrorMessage"]?.ToString())
+            </div>
+        </div>
+        <div class="mb-4 mt-4">
+            @ViewData["result"]
+            <a class="btn btn-light" href="#showmodal=@Url.Page("./Index", "CreateGroup")"><i class="fa fa-plus"></i> Add</a>
+            <a class="btn btn-light" asp-page-handler=""><i class="fa fa-rotate-right"></i> Refresh</a>
+        </div>
+
+        @if (Model.classes.Count == 0)
+        {
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <p> No class to display.</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.classes)
+                    {
+
+
+                        <tr>
+                            <td class="table-row">@(Model.classes.IndexOf(item) + 1)</td>
+                            <td class="table-row">@item.Name</td>
+                            <td class="table-row">@item.Year</td>
+                            <td>
+                                <a class="btn btn-outline-secondary" href="#showmodal=@Url.Page("./Index", "CreateModule",new { path = item.Path })"><i class="fa fa-plus"></i> Add Module</a>
+                                <a class="btn btn-outline-info" href="#showmodal=@Url.Page("./Index", "ShowModule",new { path = item.Path })"><i class="fa fa-bars"></i> Modules</a>
+                                <a class="btn btn-outline-danger" asp-page-handler="delete" asp-route-path=@item.Path>
+                                    <i class="fa fa-trash"></i>
+                                    Delete
+                                </a>
+                                <a class="btn btn-outline-primary" asp-page-handler="View" asp-route-name="@item.Name" asp-route-path="@item.Path" asp-route-year="@item.Year"><i class="fa fa-eye"></i> View</a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+
+        }
+
+
+
+    }
+    else
+    {
+        <a class="btn btn-primary btn-large" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Click here to sign in</a>
+    }
+}
+
+                           

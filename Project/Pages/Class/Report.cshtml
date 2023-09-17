@@ -1,0 +1,147 @@
+﻿@page
+@inject CookieOptions Cookie
+
+@model Project.Pages.Class.ReportModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["title"] = "Report";
+}
+<h5 class="mt-4 mb-3">Module: @Cookie.GetCookies("module")</h5>
+<nav aria-label="breadcrumb" class="mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="./Index">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Report</li>
+    </ol>
+</nav>
+<h2 class="mt-3 mb-5">Report</h2>
+<div>
+    <form method="post" asp-page-handler="Download" asp-page="Report">
+        <div class="form-group">
+            <div class="row">
+                <div class="col mb-3">
+                    @Html.Raw(@TempData["ErrorMessage"]?.ToString())
+                </div>
+            </div>
+            <h4>Information</h4>
+
+            <row>
+                <select class="contacts form-control mt-3 col-12" name="info" id="info" multiple="multiple" required>
+                    @foreach (var item in Model.Headers)
+                    {
+                        <option value="@item.title">@item.title</option>
+                    }
+                </select>
+            </row>
+            <div class="mb-3 mt-2">
+                <button type="button" name="btnInfoAll" id="btnInfoAll" class="btn btn-secondary mb-2">Select All</button>
+            </div>
+            <h4>Marks</h4>
+
+            <row>
+                <select class="contacts form-control mt-3 col-12" name="mark" id="mark" multiple="multiple" >
+                    @foreach (var item in Model.Mark)
+                    {
+                        <option value="@item.title">@item.title</option>
+                    }
+                </select>
+            </row>
+            <div class="mb-3 mt-2">
+                <button type="button" name="btnInfoAll" id="btnMarkAll" class="btn btn-secondary mb-2">Select All</button>
+            </div>
+            <h4>Attendance</h4>
+
+            <row>
+                <select class="contacts form-control mt-3 col-12" name="attendance" id="attendance" multiple="multiple" >
+                    @foreach (var item in Model.Attendance)
+                    {
+                        <option value="@item.title">@item.title</option>
+                    }
+                </select>
+            </row>
+            <div class="mb-3 mt-2">
+                <button type="button" name="btnInfoAll" id="btnAttendanceAll" class="btn btn-secondary mb-2">Select All</button>
+            </div>
+            <h4>Checkpoint</h4>
+
+            <row>
+                <select class="contacts form-control mt-3 col-12" name="checkpoint" id="checkpoint" multiple="multiple" >
+                    @foreach (var item in Model.Checkpoint)
+                    {
+                        <option value="@item.title">@item.title</option>
+                    }
+                </select>
+            </row>
+            <div class="mb-3 mt-2">
+                <button type="button" name="btnInfoAll" id="btnCheckpointAll" class="btn btn-secondary mb-2">Select All</button>
+            </div>
+
+        </div>
+
+        <row>
+            <button type="submit" class="btn btn-primary btnEmail">Create</button>
+        </row>
+
+    </form>
+
+</div>
+
+@section Scripts
+    {
+
+    <script src="~/lib/select2/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#info').select2();
+        });
+
+
+
+        $("#btnInfoAll").click(function () {
+
+            $("#info > option").prop("selected", "selected");
+            $("#info").trigger("change");
+        });
+
+        $(document).ready(function () {
+            $('#attendance').select2();
+        });
+
+
+
+        $("#btnAttendanceAll").click(function () {
+
+            $("#attendance > option").prop("selected", "selected");
+            $("#attendance").trigger("change");
+        });
+
+        $(document).ready(function () {
+            $('#checkpoint').select2();
+        });
+
+
+
+        $("#btnCheckpointAll").click(function () {
+
+            $("#checkpoint > option").prop("selected", "selected");
+            $("#checkpoint").trigger("change");
+        });
+
+        $(document).ready(function () {
+            $('#mark').select2();
+        });
+
+
+
+        $("#btnMarkAll").click(function () {
+
+            $("#mark > option").prop("selected", "selected");
+            $("#mark").trigger("change");
+        });
+    </script>
+
+}
+@section Css
+    {
+    <link href="~/lib/select2/select2.min.css" rel="stylesheet" type="text/css" />
+
+}
